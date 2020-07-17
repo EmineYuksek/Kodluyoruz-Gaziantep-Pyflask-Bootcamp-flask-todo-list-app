@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <div class="jumbotron text-center">
+    <h1>ToDoApp Uygulamasına Hoşgeldiniz..!</h1>
+    <p class="lead">Bu Uygulama Python Flask üzerinden inşa edildi. Daha fazla uygulama için takipte kalın...</p>
+    {% if session.logged_in == NULL %}
+      <a href="/register" class="btn btn-primary btn-lg">Kaydol</a>
+      <a href="/login" class="btn btn-success btn-lg">Giriş Yap</a>
+    {% endif %}
+  </div>
+{% endblock %}

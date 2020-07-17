@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>ToDo App</title>
+  </head>
+  <body>
+
+  <div style="margin-top:150px; color: darkcyan; " class="container">
+        <h3>ToDo List</h3>
+      <hr color="darkcyan">
+
+      <form action="/add" method="post">
+
+          <div class="form-group">
+            <label for="formGroupExampleInput">ToDo Başlığı</label>
+            <input type="text" name="title" class="form-control" id="formGroupExampleInput" placeholder="Başlığı Giriniz...">
+          </div>
+          <div class="form-group">
+             <label for="formGroupExampleInput2">ToDo İçeriği</label>
+              <textarea type="text" name="content" class="form-control" id="formGroupExampleInput2" placeholder="İçeriği Giriniz..."></textarea>
+          </div>
+
+          <button type="submit" style="margin-bottom:15px" class="btn btn-outline-danger"> <b>Ekle</b></button>
+
+      </form><hr>
+
+
+      {% if todos == [] %}
+            <div class="alert alert-warning" role="alert">
+                 Herhangi Bir ToDo Değeriniz Bulunmamaktadır!
+            </div>
+      {% else %}
+            <table class="table">
+        <thead>
+            <tr>
+
+              <th scope="col" bgcolor="#008b8b">id</th>
+              <th scope="col" bgcolor="#add8e6">Başlık</th>
+              <th scope="col" bgcolor="#87cefa">İçerik</th>
+              <th scope="col" bgcolor="#add8e6">Durum</th>
+              <th scope="col" bgcolor="#87cefa">Tamamla</th>
+              <th scope="col" bgcolor="#008b8b">Sil</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        <!--todos daki değerleri for döngüsü yardımı ile alıyoruz. -->
+            {% for todo in todos %}
+                 <tr>
+                    <th scope="row"> {{ todo.id }} </th> <!-- todoo içerisindeki id ye eriştik-->
+                    <td> <a href="/detail/{{ todo.id }}"> {{ todo.title }}</a> </td>
+                    <td> {{ todo.content }} </td>
+
+
+                    {% if todo.complete == False %}
+                        <td>Tamamlanmadı</td>
+                    {% else %}
+                        <td>Tamamlandı</td>
+                    {% endif %}
+
+                    <td><a href="/complete/{{ todo.id }}" class="btn btn-outline-info">Tamamla</a> </td>
+                    <td><a href="/delete/{{ todo.id }}" class="btn btn-outline-danger">Sil</a></td>
+
+                 </tr>
+             {% endfor %}
+
+        </tbody>
+        </table>
+
+
+  {% endif %}
+
+  </div>
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>

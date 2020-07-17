@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>{{article.title}}</h1>
+  <small>{{Article.create_date}} tarihinde {{article.author}} tarafından yazılmıştır.</small>
+  <hr>
+  <div>
+    {{article.body | safe}}
+  </div>
+{% endblock %}
